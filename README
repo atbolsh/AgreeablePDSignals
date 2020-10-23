@@ -1,0 +1,54 @@
+This is a small thing to try to get experienced agents to use "social approval" signals to train inexperienced agents.
+
+Agents learn to value approval from different agents in its surroundings, and this serves to form groups. 
+Hopefully, humans will be able to step in and play the role of these social approval instructors.
+
+Halfway through, I'll try to integrate this with minimal symbolic communication and OORL.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initial project: agents who choose who to play Prisoner's Dilemma with, given prior experiences.
+
+Everyone goes in a circle, picking their opponent for Prisoner's Dilemma. The rewards are such that you want to be picked (positive; 0 for everyone not in the game that round).
+Basically, there are two games going on: whom to pick when it's your turn, and how to play within the round.
+
+Try simple Q-learning first; build models (including the "new" moniker) second.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Structure:
+
+Environment variable: "In-game" and "choosing player."
+
+"In-game" will also show the User-ID of the opponent, so the agent can learn different strategies based on different users.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Prediction
+
+
+Most likely, we'll get tons of defections initially, until I train it with ready-made "dummy agents" which always defect or always approve.
+
+The idea of reacting to a "new agent," but the "new" label itself is transferable, will also be worth exploring.
+
+That way, the agent develops a robust policy for treating "new" agents.
+An additional complication can be "Group ID" or "Queue ID," where the agent can gain experience about reputation in different groups and learn to be 
+agreeable initially, even if no one from the previous group was willing to engage with it. You'll need a low gamma to make this work, of course, and 
+likely some additional dummy agents.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Further Work
+
+Learning to be agreeable in a social setting is a little artificial, and very doable. It's really not what I'm setting out to do, though; 
+after that, I will be able to expose the expected-Q-value to different agents (no "conscious" signals yet), and they can react differently to 
+"friendly" and "unfriendly" agents.
+
+After that, either that, or something like it, can be used for instruction by skilled agents for unskilled agents.
+
+After that, we can start "manipulation" games by giving control over that signal away.
+Discrete symbols and instructions can be added after that. Or, more interestingly, model-based symbolic instructions. 
+But that is far away.
+
+For now, focus on the PD setting.
+
