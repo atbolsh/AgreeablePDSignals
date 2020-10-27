@@ -7,10 +7,10 @@ Halfway through, I'll try to integrate this with minimal symbolic communication 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Initial project: agents who choose who to play Prisoner's Dilemma with, given prior experiences.
+Initial project: agents which choose which to play Prisoner's Dilemma with, given prior experiences.
 
 Everyone goes in a circle, picking their opponent for Prisoner's Dilemma. The rewards are such that you want to be picked (positive; 0 for everyone not in the game that round).
-Basically, there are two games going on: whom to pick when it's your turn, and how to play within the round.
+Basically, there are two games going on: which opponent to pick when it's your turn, and how to play within the round.
 
 Try simple Q-learning first; build models (including the "new" moniker) second.
 
