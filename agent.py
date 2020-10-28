@@ -2,7 +2,7 @@ import numpy as np
 
 class Agent:
     
-    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.1):
+    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.3):
         self.name = name
         self.initial = initial
         self.current = initial

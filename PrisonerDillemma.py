@@ -4,9 +4,18 @@ class PD:
     def __init__(self, player1, player2, lobbyName = "Default"): # TODO: make Player class
         self.p1 = player1
         self.p2 = player2
-        # TODO: after initial testing, make this into a state the player asks for and receives, not this rude assignment.
-        self.p1.current = "InGame__" + self.p2.name
-        self.p2.current = "InGame__" + self.p1.name
+
+        newP1state = "InGame__" + self.p2.name
+        newP2state = "InGame__" + self.p1.name
+        if self.p1.waiting: # It just choose to be in the game
+            self.p1.feedback(newP1state, 0, self.actions(newP1state))
+        else:
+            self.p1.current = newP1state # Just roughly plop it. We'll have event handlers soon, though.
+        if self.p2.waiting: # It just choose to be in the game
+            self.p2.feedback(newP2state, 0, self.actions(newP2state))
+        else:
+            self.p2.current = newP2state # Just roughly plop it. We'll have event handlers soon, though.
+
         self.payoffs = {"vouch_vouch":(10, 10), "vouch_defect":(0, 20), "defect_vouch":(20, 0), "defect_defect":(5, 5)}
         self.lobby = lobbyName
 

@@ -55,10 +55,5 @@ class HumanAgent:
         elif n == 2:
             return ' and '.join(stringList)
         else:
-            return ', ',join(stringList[:-1] + " and " + stringList[-1])
-
-
-
-
-
+            return ', '.join(stringList[:-1] + " and " + stringList[-1])
  
