@@ -16,7 +16,9 @@ class PD:
         else:
             self.p2.current = newP2state # Just roughly plop it. We'll have event handlers soon, though.
 
-        self.payoffs = {"vouch_vouch":(10, 10), "vouch_defect":(0, 20), "defect_vouch":(20, 0), "defect_defect":(5, 5)}
+        # I wanted the advantage from defecting to be much smaller than the damage done by it.
+        # Also, all rewards are positive; you always want to be picked.
+        self.payoffs = {"vouch_vouch":(10, 10), "vouch_defect":(0, 12), "defect_vouch":(12, 0), "defect_defect":(5, 5)}
         self.lobby = lobbyName
 
     def combStrings(self, s1, s2):
@@ -37,4 +39,5 @@ class PD:
         reward1, reward2 = self.payoffs[newState1]
         self.p1.feedback(newState1, reward1, self.actions(newState1))
         self.p2.feedback(newState2, reward2, self.actions(newState2))
+        return newState1
 

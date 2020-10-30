@@ -37,7 +37,7 @@ class Lobby:
         ##
         ## Then, the game itself.
         pd = PD(player, opponent)
-        pd.game()
+        result = pd.game() # Actions of both are here.
         ## THen, some bureaucracy around returning here.
         newActions = ['returnToLobby']
         newState = 'inLobby'
@@ -46,10 +46,13 @@ class Lobby:
         player.feedback(newState, newReward, playerActions)
         opponent.move(newActions)
         opponent.feedback(newState, newReward, opponentActions)
+        return 'player_' + player.name + '_picked_' + opponent.name + '_result_' + result
 
     def round(self):
+        r = []
         for key in self.players.keys():\
-            self.turn(key)
+            r.append(self.turn(key))
+        return r
 
 
 

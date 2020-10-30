@@ -2,7 +2,7 @@ import numpy as np
 
 class Agent:
     
-    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.3):
+    def __init__(self, name, initial = str("inLobby"), gamma = 0.99, alpha = 0.5, eps=0.1):
         self.name = name
         self.initial = initial
         self.current = initial
@@ -92,7 +92,41 @@ class Agent:
         return sum(rewardTrace), stateTrace, actionTrace, rewardTrace
 
 
+class maimedAgent(Agent): # Method for limiting the abilities of Agents into a limited range
+    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.3):
+        super(maimedAgent, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
+
+    def move(self, actions):
+        if self.maimCondition(self.current):
+            As = self.reduceActions(actions)
+        else:
+            As = actions
+        return super(maimedAgent, self).move(As)
+
+    def maimCondition(self, state): # To be overwritten as True in some cases
+        return False
+
+    def reduceAction(self, actions):
+        return actions
 
 
+class Grouch(maimedAgent):
+    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.3):
+        super(Grouch, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
 
- 
+    def maimCondition(self, state):
+        return state.startswith("InGame")
+
+    def reduceActions(self, actions):
+        return [action for action in actions if action != 'vouch']
+
+class Sucker(maimedAgent):
+    def __init__(self, name, initial = str("inLobby"), gamma = 1.0, alpha = 0.5, eps=0.3):
+        super(Sucker, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
+
+    def maimCondition(self, state):
+        return state.startswith("InGame")
+
+    def reduceActions(self, actions):
+        return [action for action in actions if action != 'defect']
+
