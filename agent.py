@@ -93,9 +93,6 @@ class Agent:
 
 
 class maimedAgent(Agent): # Method for limiting the abilities of Agents into a limited range
-    def __init__(self, name, initial = str("inLobby"), gamma = 0.99, alpha = 0.5, eps=0.1):
-        super(maimedAgent, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
-
     def move(self, actions):
         if self.maimCondition(self.current):
             As = self.reduceActions(actions)
@@ -111,9 +108,6 @@ class maimedAgent(Agent): # Method for limiting the abilities of Agents into a l
 
 
 class Grouch(maimedAgent):
-    def __init__(self, name, initial = str("inLobby"), gamma = 0.99, alpha = 0.5, eps=0.1):
-        super(Grouch, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
-
     def maimCondition(self, state):
         return state.startswith("InGame")
 
@@ -121,9 +115,6 @@ class Grouch(maimedAgent):
         return [action for action in actions if action != 'vouch']
 
 class Sucker(maimedAgent):
-    def __init__(self, name, initial = str("inLobby"), gamma = 0.99, alpha = 0.5, eps=0.1):
-        super(Sucker, self).__init__(name=name, initial=initial, gamma=gamma, alpha=alpha, eps=eps)
-
     def maimCondition(self, state):
         return state.startswith("InGame")
 
